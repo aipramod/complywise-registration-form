@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | ComplyWise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'gradient-x': 'gradient-x 15s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        'gradient-x': {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            },
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .floating-input > input::placeholder {
+            color: transparent;
+        }
+
+        .floating-input > input:focus,
+        .floating-input > input:not(:placeholder-shown) {
+            @apply pt-8;
+        }
+
+        /* Enhanced label styling */
+        .floating-input > input:focus ~ label,
+        .floating-input > input:not(:placeholder-shown) ~ label {
+            @apply opacity-100 scale-75 -translate-y-3 translate-x-1;
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
+            background: linear-gradient(to right, rgba(168, 85, 247, 0.25), rgba(79, 70, 229, 0.25));
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .floating-input > label {
+            @apply absolute top-4 left-4 pointer-events-none transform origin-left transition-all duration-200 ease-in-out;
+            color: #e0e7ff; /* Indigo-100, very light blue/purple */
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+        }
+
+        .input-icon {
+            color: #c4b5fd; /* Violet-200, light purple */
+            filter: drop-shadow(0 0 4px rgba(168, 85, 247, 0.4));
+        }
+
+        .floating-input input {
+            @apply bg-white/10;
+            box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .floating-input input:focus {
+            @apply bg-white/15;
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.15),
+                       0 0 15px rgba(168, 85, 247, 0.3);
+        }
+
+        /* Error message enhancement */
+        .error-message {
+            @apply absolute -bottom-6 left-0 text-red-300 text-sm;
+            text-shadow: 0 0 4px rgba(255, 0, 0, 0.2);
+        }
+
+        /* Step indicator */
+        .step-indicator {
+            @apply flex justify-center mb-8;
+        }
+
+        .step {
+            @apply w-3 h-3 mx-1 rounded-full bg-gray-500 transition-all duration-300;
+        }
+
+        .step.active {
+            @apply w-10 bg-gradient-to-r from-purple-500 to-blue-500;
+        }
+
+        /* Checkbox styling */
+        .custom-checkbox {
+            @apply relative flex items-center;
+        }
+
+        .custom-checkbox input {
+            @apply absolute opacity-0 w-0 h-0;
+        }
+
+        .custom-checkbox .checkmark {
+            @apply inline-block w-5 h-5 rounded border border-purple-300 bg-white/10 mr-3 transition-colors;
+        }
+
+        .custom-checkbox input:checked ~ .checkmark {
+            @apply bg-gradient-to-r from-purple-600 to-blue-500;
+        }
+
+        .custom-checkbox .checkmark:after {
+            content: '';
+            @apply absolute hidden;
+        }
+
+        .custom-checkbox input:checked ~ .checkmark:after {
+            @apply block;
+            left: 8px;
+            top: 4px;
+            width: 6px;
+            height: 12px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 animate-gradient-x flex items-center justify-center p-4 md:p-8">
+    <!-- Left Section (Hidden on Mobile) -->
+    <div class="hidden lg:block lg:w-1/2 p-12">
+        <div class="max-w-md mx-auto text-center">
+            <div class="flex justify-center mb-6">
+                <div class="w-24 h-24 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center animate-float">
+                    <i class="fas fa-shield-alt text-4xl text-white"></i>
+                </div>
+            </div>
+            <h1 class="text-4xl font-bold text-white mb-4">ComplyWise</h1>
+            <p class="text-xl text-gray-300 mb-8">Your complete compliance management solution for modern businesses.</p>
+            
+            <div class="space-y-6 text-left bg-white/5 backdrop-blur-md p-6 rounded-xl">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                        <i class="fas fa-check-circle text-purple-400"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-medium text-white">Streamlined Compliance</h3>
+                        <p class="text-gray-300">Manage all your regulatory requirements in one place</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                        <i class="fas fa-check-circle text-purple-400"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-medium text-white">Real-time Updates</h3>
+                        <p class="text-gray-300">Stay current with regulatory changes as they happen</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                        <i class="fas fa-check-circle text-purple-400"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-medium text-white">Risk Management</h3>
+                        <p class="text-gray-300">Identify and mitigate compliance risks before they become issues</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Section (Registration Form) -->
+    <div class="w-full lg:w-1/2 max-w-md mx-auto">
+        <div class="bg-white/10 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/20">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-white mb-2">Create Your Account</h2>
+                <p class="text-gray-300">Join thousands of companies managing compliance with ease</p>
+            </div>
+
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <div class="step active"></div>
+                <div class="step"></div>
+                <div class="step"></div>
+            </div>
+
+            <!-- Steps Container -->
+            <div class="steps-container">
+                <!-- Step 1: Account Information -->
+                <div id="step1" class="step-content space-y-6">
+                    <!-- Name Input -->
+                    <div class="relative floating-input">
+                        <input type="text" id="fullName"
+                            class="w-full h-14 px-4 text-white bg-white/5 rounded-lg border border-gray-600/50 outline-none transition-all
+                            focus:border-purple-500/50 focus:bg-white/10"
+                            placeholder="Full Name">
+                        <label for="fullName" class="flex items-center gap-2">
+                            <i class="fas fa-user text-sm input-icon"></i> <span class="font-medium">Full Name</span>
+                        </label>
+                        <span class="error-message hidden">Please enter your full name</span>
+                    </div>
+
+                    <!-- Email Input -->
+                    <div class="relative floating-input">
+                        <input type="email" id="email"
+                            class="w-full h-14 px-4 text-white bg-white/5 rounded-lg border border-gray-600/50 outline-none transition-all
+                            focus:border-purple-500/50 focus:bg-white/10"
+                            placeholder="Email Address">
+                        <label for="email" class="flex items-center gap-2">
+                            <i class="fas fa-envelope text-sm input-icon"></i> <span class="font-medium">Email Address</span>
+                        </label>
+                        <span class="error-message hidden">Please enter a valid email address</span>
+                    </div>
+
+                    <!-- Password Input -->
+                    <div class="relative floating-input">
+                        <input type="password" id="password"
+                            class="w-full h-14 px-4 text-white bg-white/5 rounded-lg border border-gray-600/50 outline-none transition-all
+                            focus:border-purple-500/50 focus:bg-white/10"
+                            placeholder="Create Password">
+                        <label for="password" class="flex items-center gap-2">
+                            <i class="fas fa-lock text-sm input-icon"></i> <span class="font-medium">Create Password</span>
+                        </label>
+                        <span class="error-message hidden">Password must be at least 8 characters</span>
+                    </div>
+
+                    <!-- Password Strength Meter -->
+                    <div class="mt-2">
+                        <div class="flex mb-1">
+                            <span class="text-xs text-gray-300">Password Strength:</span>
+                            <span class="text-xs ml-auto text-green-400" id="passwordStrength">Weak</span>
+                        </div>
+                        <div class="w-full h-1 bg-gray-600 rounded-full overflow-hidden">
+                            <div id="strengthBar" class="h-full bg-red-500 transition-all duration-300" style="width: 10%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Next Button -->
+                    <button id="nextStep1" 
+                        class="w-full py-4 bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 
+                        text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]
+                        focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-800">
+                        Next Step
+                    </button>
+                </div>
+
+                <!-- Step 2: Company Details (Hidden by Default) -->
+                <div id="step2" class="step-content space-y-6 hidden">
+                    <!-- Company Name Input -->
+                    <div class="relative floating-input">
+                        <input type="text" id="companyName"
+                            class="w-full h-14 px-4 text-white bg-white/5 rounded-lg border border-gray-600/50 outline-none transition-all
+                            focus:border-purple-500/50 focus:bg-white/10"
+                            placeholder="Company Name">
+                        <label for="companyName" class="flex items-center gap-2">
+                            <i class="fas fa-building text-sm input-icon"></i> <span class="font-medium">Company Name</span>
+                        </label>
+                        <span class="error-message hidden">Please enter your company name</span>
+                    </div>
+
+                    <!-- Industry Dropdown -->
+                    <div class="relative">
+                        <select id="industry" 
+                            class="w-full h-14 px-4 text-white bg-white/5 rounded-lg border border-gray-600/50 outline-none transition-all
+                            focus:border-purple-500/50 focus:bg-white/10 appearance-none">
+                            <option value="" disabled selected hidden>Select Industry</option>
+                            <option value="finance">Finance & Banking</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="technology">Technology</option>
+                            <option value="manufacturing">Manufacturing</option>
+                            <option value="retail">Retail</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <label for="industry" class="absolute top-4 left-4 text-gray-300 pointer-events-none">
+                            <i class="fas fa-industry text-sm input-icon mr-2"></i><span class="font-medium">Industry</span>
+                        </label>
+                        <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
+                            <i class="fas fa-chevron-down text-purple-300"></i>
+                        </div>
+                    </div>
+
+                    <!-- Company Size -->
+                    <div class="relative">
+                        <select id="companySize" 
+                            class="w-full h-14 px-4 text-white bg-white/5 rounded-lg border border-gray-600/50 outline-none transition-all
+                            focus:border-purple-500/50 focus:bg-white/10 appearance-none">
+                            <option value="" disabled selected hidden>Company Size</option>
+                            <option value="1-10">1-10 employees</option>
+                            <option value="11-50">11-50 employees</option>
+                            <option value="51-200">51-200 employees</option>
+                            <option value="201-500">201-500 employees</option>
+                            <option value="501+">501+ employees</option>
+                        </select>
+                        <label for="companySize" class="absolute top-4 left-4 text-gray-300 pointer-events-none">
+                            <i class="fas fa-users text-sm input-icon mr-2"></i><span class="font-medium">Company Size</span>
+                        </label>
+                        <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
+                            <i class="fas fa-chevron-down text-purple-300"></i>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="flex gap-4">
+                        <button id="prevStep2" 
+                            class="w-1/2 py-4 bg-gray-700 hover:bg-gray-600
+                            text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]">
+                            Previous
+                        </button>
+                        <button id="nextStep2" 
+                            class="w-1/2 py-4 bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 
+                            text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]
+                            focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-800">
+                            Next Step
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Confirm & Submit (Hidden by Default) -->
+                <div id="step3" class="step-content space-y-6 hidden">
+                    <div class="p-4 rounded-lg bg-white/5 space-y-3">
+                        <h3 class="text-white font-medium">Account Details</h3>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Full Name:</span>
+                            <span class="text-white" id="summaryName">-</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Email:</span>
+                            <span class="text-white" id="summaryEmail">-</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Company:</span>
+                            <span class="text-white" id="summaryCompany">-</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Industry:</span>
+                            <span class="text-white" id="summaryIndustry">-</span>
+                        </div>
+                    </div>
+
+                    <!-- Terms & Privacy Checkbox -->
+                    <div class="mt-4">
+                        <label class="custom-checkbox text-gray-300">
+                            <input type="checkbox" id="termsCheckbox">
+                            <span class="checkmark"></span>
+                            I agree to the <a href="#" class="text-purple-400 hover:text-purple-300">Terms of Service</a> and 
+                            <a href="#" class="text-purple-400 hover:text-purple-300">Privacy Policy</a>
+                        </label>
+                        <div id="termsError" class="text-red-400 text-sm mt-1 hidden">
+                            You must accept the terms to continue
+                        </div>
+                    </div>
+
+                    <!-- Newsletter Checkbox -->
+                    <div class="mt-4">
+                        <label class="custom-checkbox text-gray-300">
+                            <input type="checkbox" id="newsletterCheckbox" checked>
+                            <span class="checkmark"></span>
+                            Send me updates about compliance news and product features
+                        </label>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="flex gap-4">
+                        <button id="prevStep3" 
+                            class="w-1/2 py-4 bg-gray-700 hover:bg-gray-600
+                            text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]">
+                            Previous
+                        </button>
+                        <button id="submitRegistration" 
+                            class="w-1/2 py-4 bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 
+                            text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]
+                            focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-800">
+                            Complete Registration
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Success Message (Hidden by Default) -->
+                <div id="registrationSuccess" class="hidden text-center py-8">
+                    <div class="mb-6 flex justify-center">
+                        <div class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-check text-2xl text-green-400"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl text-white font-bold mb-2">Registration Successful!</h3>
+                    <p class="text-gray-300 mb-6">Thank you for creating an account with ComplyWise.</p>
+                    <p class="text-gray-300 mb-8">We've sent a verification email to your inbox. Please verify your email to continue.</p>
+                    <a href="index.html" class="inline-block py-4 px-8 bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 
+                            text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]">
+                        Go to Login
+                    </a>
+                </div>
+            </div>
+
+            <!-- Login Link -->
+            <div class="text-center text-gray-300 mt-8">
+                Already have an account? 
+                <a href="index.html" class="text-purple-400 hover:text-purple-300 font-medium">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Current step tracker
+        let currentStep = 1;
+        
+        // DOM elements
+        const steps = document.querySelectorAll('.step-content');
+        const stepIndicators = document.querySelectorAll('.step');
+        const registrationSuccess = document.getElementById('registrationSuccess');
+        
+        // Navigation buttons
+        const nextStep1 = document.getElementById('nextStep1');
+        const nextStep2 = document.getElementById('nextStep2');
+        const prevStep2 = document.getElementById('prevStep2');
+        const prevStep3 = document.getElementById('prevStep3');
+        const submitRegistration = document.getElementById('submitRegistration');
+        
+        // Password strength meter
+        const passwordInput = document.getElementById('password');
+        const strengthBar = document.getElementById('strengthBar');
+        const strengthText = document.getElementById('passwordStrength');
+        
+        // Summary fields
+        const summaryName = document.getElementById('summaryName');
+        const summaryEmail = document.getElementById('summaryEmail');
+        const summaryCompany = document.getElementById('summaryCompany');
+        const summaryIndustry = document.getElementById('summaryIndustry');
+        
+        // Input fields
+        const fullNameInput = document.getElementById('fullName');
+        const emailInput = document.getElementById('email');
+        const companyNameInput = document.getElementById('companyName');
+        const industrySelect = document.getElementById('industry');
+
+        // Terms checkbox
+        const termsCheckbox = document.getElementById('termsCheckbox');
+        const termsError = document.getElementById('termsError');
+        
+        // Show specific step
+        function showStep(stepNumber) {
+            // Hide all steps
+            steps.forEach(step => step.classList.add('hidden'));
+            
+            // Update step indicators
+            stepIndicators.forEach((indicator, index) => {
+                if (index < stepNumber) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+            
+            // Show current step
+            document.getElementById(`step${stepNumber}`).classList.remove('hidden');
+            currentStep = stepNumber;
+        }
+        
+        // Password strength meter
+        passwordInput.addEventListener('input', function() {
+            const value = this.value;
+            let strength = 0;
+            
+            // Check length
+            if (value.length >= 8) strength += 1;
+            
+            // Check for mixed case
+            if (value.match(/[a-z]/) && value.match(/[A-Z]/)) strength += 1;
+            
+            // Check for numbers
+            if (value.match(/\d/)) strength += 1;
+            
+            // Check for special characters
+            if (value.match(/[^a-zA-Z\d]/)) strength += 1;
+            
+            // Update strength meter
+            switch (strength) {
+                case 0:
+                    strengthBar.style.width = '10%';
+                    strengthBar.className = 'h-full bg-red-500 transition-all duration-300';
+                    strengthText.textContent = 'Weak';
+                    strengthText.className = 'text-xs ml-auto text-red-400';
+                    break;
+                case 1:
+                    strengthBar.style.width = '25%';
+                    strengthBar.className = 'h-full bg-orange-500 transition-all duration-300';
+                    strengthText.textContent = 'Fair';
+                    strengthText.className = 'text-xs ml-auto text-orange-400';
+                    break;
+                case 2:
+                    strengthBar.style.width = '50%';
+                    strengthBar.className = 'h-full bg-yellow-500 transition-all duration-300';
+                    strengthText.textContent = 'Good';
+                    strengthText.className = 'text-xs ml-auto text-yellow-400';
+                    break;
+                case 3:
+                    strengthBar.style.width = '75%';
+                    strengthBar.className = 'h-full bg-blue-500 transition-all duration-300';
+                    strengthText.textContent = 'Strong';
+                    strengthText.className = 'text-xs ml-auto text-blue-400';
+                    break;
+                case 4:
+                    strengthBar.style.width = '100%';
+                    strengthBar.className = 'h-full bg-green-500 transition-all duration-300';
+                    strengthText.textContent = 'Very Strong';
+                    strengthText.className = 'text-xs ml-auto text-green-400';
+                    break;
+            }
+        });
+        
+        // Validate email format
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        // Step 1 Next button
+        nextStep1.addEventListener('click', function() {
+            // Validate fields
+            let isValid = true;
+            
+            // Validate name
+            if (fullNameInput.value.trim() === '') {
+                fullNameInput.nextElementSibling.nextElementSibling.classList.remove('hidden');
+                isValid = false;
+            } else {
+                fullNameInput.nextElementSibling.nextElementSibling.classList.add('hidden');
+            }
+            
+            // Validate email
+            if (emailInput.value.trim() === '' || !validateEmail(emailInput.value)) {
+                emailInput.nextElementSibling.nextElementSibling.classList.remove('hidden');
+                isValid = false;
+            } else {
+                emailInput.nextElementSibling.nextElementSibling.classList.add('hidden');
+            }
+            
+            // Validate password
+            if (passwordInput.value.length < 8) {
+                passwordInput.nextElementSibling.nextElementSibling.classList.remove('hidden');
+                isValid = false;
+            } else {
+                passwordInput.nextElementSibling.nextElementSibling.classList.add('hidden');
+            }
+            
+            if (isValid) {
+                showStep(2);
+            }
+        });
+        
+        // Step 2 Prev button
+        prevStep2.addEventListener('click', function() {
+            showStep(1);
+        });
+        
+        // Step 2 Next button
+        nextStep2.addEventListener('click', function() {
+            // Validate company name
+            let isValid = true;
+            
+            if (companyNameInput.value.trim() === '') {
+                companyNameInput.nextElementSibling.nextElementSibling.classList.remove('hidden');
+                isValid = false;
+            } else {
+                companyNameInput.nextElementSibling.nextElementSibling.classList.add('hidden');
+            }
+            
+            if (isValid) {
+                // Update summary
+                summaryName.textContent = fullNameInput.value;
+                summaryEmail.textContent = emailInput.value;
+                summaryCompany.textContent = companyNameInput.value;
+                
+                // Get industry text
+                const industryIndex = industrySelect.selectedIndex;
+                if (industryIndex > 0) {
+                    summaryIndustry.textContent = industrySelect.options[industryIndex].text;
+                } else {
+                    summaryIndustry.textContent = 'Not specified';
+                }
+                
+                showStep(3);
+            }
+        });
+        
+        // Step 3 Prev button
+        prevStep3.addEventListener('click', function() {
+            showStep(2);
+        });
+        
+        // Submit Registration button
+        submitRegistration.addEventListener('click', function() {
+            // Validate terms checkbox
+            if (!termsCheckbox.checked) {
+                termsError.classList.remove('hidden');
+                return;
+            }
+            
+            termsError.classList.add('hidden');
+            
+            // Hide all steps
+            steps.forEach(step => step.classList.add('hidden'));
+            
+            // Hide step indicators
+            document.querySelector('.step-indicator').classList.add('hidden');
+            
+            // Show success message
+            registrationSuccess.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html> 
