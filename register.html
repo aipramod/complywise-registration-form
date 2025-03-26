@@ -79,8 +79,16 @@
 
         /* Error message enhancement */
         .error-message {
-            @apply absolute -bottom-6 left-0 text-red-300 text-sm;
-            text-shadow: 0 0 4px rgba(255, 0, 0, 0.2);
+            @apply absolute -bottom-6 left-0 text-white text-sm font-medium;
+            background-color: rgba(248, 113, 113, 0.5);
+            padding: 3px 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(248, 113, 113, 0.3);
+        }
+
+        .error-message i {
+            color: #ffeded;
+            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
         }
 
         /* Step indicator */
@@ -204,7 +212,7 @@
                         <label for="fullName" class="flex items-center gap-2">
                             <i class="fas fa-user text-sm input-icon"></i> <span class="font-medium">Full Name</span>
                         </label>
-                        <span class="error-message hidden">Please enter your full name</span>
+                        <span class="error-message hidden"><i class="fas fa-exclamation-circle mr-1"></i> Please enter your full name</span>
                     </div>
 
                     <!-- Email Input -->
@@ -216,7 +224,7 @@
                         <label for="email" class="flex items-center gap-2">
                             <i class="fas fa-envelope text-sm input-icon"></i> <span class="font-medium">Email Address</span>
                         </label>
-                        <span class="error-message hidden">Please enter a valid email address</span>
+                        <span class="error-message hidden"><i class="fas fa-exclamation-circle mr-1"></i> Please enter a valid email address</span>
                     </div>
 
                     <!-- Password Input -->
@@ -228,7 +236,7 @@
                         <label for="password" class="flex items-center gap-2">
                             <i class="fas fa-lock text-sm input-icon"></i> <span class="font-medium">Create Password</span>
                         </label>
-                        <span class="error-message hidden">Password must be at least 8 characters</span>
+                        <span class="error-message hidden"><i class="fas fa-exclamation-circle mr-1"></i> Password must be at least 8 characters</span>
                     </div>
 
                     <!-- Password Strength Meter -->
@@ -262,7 +270,7 @@
                         <label for="companyName" class="flex items-center gap-2">
                             <i class="fas fa-building text-sm input-icon"></i> <span class="font-medium">Company Name</span>
                         </label>
-                        <span class="error-message hidden">Please enter your company name</span>
+                        <span class="error-message hidden"><i class="fas fa-exclamation-circle mr-1"></i> Please enter your company name</span>
                     </div>
 
                     <!-- Industry Dropdown -->
@@ -352,8 +360,8 @@
                             I agree to the <a href="#" class="text-purple-400 hover:text-purple-300">Terms of Service</a> and 
                             <a href="#" class="text-purple-400 hover:text-purple-300">Privacy Policy</a>
                         </label>
-                        <div id="termsError" class="text-red-400 text-sm mt-1 hidden">
-                            You must accept the terms to continue
+                        <div id="termsError" class="text-white text-sm mt-1 hidden bg-red-400/50 p-2 rounded-md">
+                            <i class="fas fa-exclamation-circle mr-1" style="color: #ffeded;"></i> You must accept the terms to continue
                         </div>
                     </div>
 
