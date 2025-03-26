@@ -43,23 +43,22 @@
         .floating-input > input:focus ~ label,
         .floating-input > input:not(:placeholder-shown) ~ label {
             @apply opacity-100 scale-75 -translate-y-3 translate-x-1;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-            background: linear-gradient(to right, rgba(147, 51, 234, 0.3), rgba(79, 70, 229, 0.3));
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
+            background: linear-gradient(to right, rgba(168, 85, 247, 0.25), rgba(79, 70, 229, 0.25));
             padding: 2px 8px;
             border-radius: 4px;
-            backdrop-filter: blur(4px);
         }
 
         .floating-input > label {
-            @apply absolute top-4 left-4 text-white pointer-events-none transform origin-left transition-all duration-200 ease-in-out;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            @apply absolute top-4 left-4 pointer-events-none transform origin-left transition-all duration-200 ease-in-out;
+            color: #e0e7ff; /* Indigo-100, very light blue/purple */
             font-size: 1.1em;
             letter-spacing: 0.5px;
         }
 
         .input-icon {
-            @apply text-purple-300;
-            filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.6));
+            color: #c4b5fd; /* Violet-200, light purple */
+            filter: drop-shadow(0 0 4px rgba(168, 85, 247, 0.4));
         }
 
         .floating-input input {
