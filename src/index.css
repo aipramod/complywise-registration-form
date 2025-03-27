@@ -1,0 +1,228 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Animation styles */
+@keyframes gradient-x {
+  0%, 100% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+}
+
+.animate-gradient-x {
+  animation: gradient-x 15s ease infinite;
+}
+
+@keyframes float {
+  0% { 
+    transform: translateY(0) rotate(0deg); 
+  }
+  25% {
+    transform: translateY(-5px) rotate(0.5deg);
+  }
+  50% { 
+    transform: translateY(-10px) rotate(1deg); 
+  }
+  75% {
+    transform: translateY(-5px) rotate(0.5deg);
+  }
+  100% { 
+    transform: translateY(0) rotate(0deg); 
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+/* Blob animation for background */
+@keyframes blob-bounce {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+    opacity: 0.2;
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+    opacity: 0.25;
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+    opacity: 0.15;
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+    opacity: 0.2;
+  }
+}
+
+.animate-blob {
+  animation: blob-bounce 15s ease-in-out infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    filter: blur(3.5rem) brightness(0.8);
+  }
+  50% {
+    filter: blur(4rem) brightness(1);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 8s ease-in-out infinite;
+}
+
+/* Floating input styling */
+.floating-input > input::placeholder {
+  color: transparent;
+}
+
+.floating-input > input:focus,
+.floating-input > input:not(:placeholder-shown) {
+  padding-top: 2rem;
+}
+
+.floating-input > input:focus ~ label,
+.floating-input > input:not(:placeholder-shown) ~ label {
+  opacity: 1;
+  transform: scale(0.75) translateY(-0.75rem) translateX(0.25rem);
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
+  background: linear-gradient(to right, rgba(168, 85, 247, 0.25), rgba(79, 70, 229, 0.25));
+  padding: 2px 8px;
+  border-radius: 4px;
+  z-index: 10;
+}
+
+.floating-input > label {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  pointer-events: none;
+  transform-origin: left;
+  transition: all 0.2s ease-in-out;
+  color: #e0e7ff;
+  font-size: 1.1em;
+  letter-spacing: 0.5px;
+  z-index: 10;
+}
+
+.input-icon {
+  color: #c4b5fd;
+  filter: drop-shadow(0 0 4px rgba(168, 85, 247, 0.4));
+}
+
+.floating-input input {
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.floating-input input:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.15),
+              0 0 15px rgba(168, 85, 247, 0.3);
+}
+
+/* Error message styling */
+.error-message {
+  position: absolute;
+  bottom: -2.5rem;
+  left: 0;
+  color: rgb(252, 165, 165);
+  font-size: 0.875rem;
+  text-shadow: 0 0 4px rgba(255, 0, 0, 0.2);
+  background: rgba(239, 68, 68, 0.1);
+  padding: 4px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  z-index: 20;
+}
+
+/* Create more space between form elements */
+.relative.mb-8 {
+  margin-bottom: 4rem !important;
+  position: relative;
+}
+
+/* Password strength meter spacing */
+.space-y-3 {
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  display: block;
+}
+
+/* Improve spacing for step indicator */
+.space-y-2 > div,
+.space-y-6 > div {
+  margin-bottom: 2.5rem;
+}
+
+/* Base styles */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: white;
+}
+
+option {
+  color: #1f2937;
+  background-color: white;
+}
+
+/* Fix for select elements */
+select {
+  margin-bottom: 1.5rem;
+}
+
+/* Ensure form container has appropriate padding */
+.p-8 {
+  padding: 2rem !important;
+}
+
+/* Fix for checkboxes */
+.mb-6 {
+  margin-bottom: 2.5rem !important;
+}
+
+/* Add this glass effect animation at the end of the file */
+@keyframes glass-shine {
+  0% {
+    box-shadow: 0 25px 50px -12px rgba(31, 41, 55, 0.25);
+  }
+  50% {
+    box-shadow: 0 25px 50px -12px rgba(79, 70, 229, 0.2);
+  }
+  100% {
+    box-shadow: 0 25px 50px -12px rgba(31, 41, 55, 0.25);
+  }
+}
+
+.bg-white\/10 {
+  animation: glass-shine 8s infinite;
+}
+
+/* Enhance the form background to be more responsive to movement */
+.backdrop-blur-xl {
+  backdrop-filter: blur(24px);
+  transition: all 0.5s ease-in-out;
+}
+
+.backdrop-blur-xl:hover {
+  backdrop-filter: blur(20px);
+  background-color: rgba(255, 255, 255, 0.12);
+}
