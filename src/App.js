@@ -37,6 +37,11 @@ const Particles = () => {
 function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 flex items-center justify-center p-4 animate-gradient-x relative">
+      {/* Grid background */}
+      <div className="absolute inset-0 z-0">
+        <div className="h-full w-full grid-bg opacity-20"></div>
+      </div>
+      
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -left-40 w-80 h-80 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob pulse-glow"></div>
         <div className="absolute top-0 -right-20 w-80 h-80 bg-yellow-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000 pulse-glow"></div>

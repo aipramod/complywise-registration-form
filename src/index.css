@@ -226,3 +226,28 @@ select {
   backdrop-filter: blur(20px);
   background-color: rgba(255, 255, 255, 0.12);
 }
+
+/* Grid background styling */
+.grid-bg {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-position: center center;
+  animation: grid-pulse 20s ease infinite;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateX(5deg);
+}
+
+@keyframes grid-pulse {
+  0%, 100% {
+    background-size: 40px 40px;
+    opacity: 0.15;
+    transform: perspective(1000px) rotateX(5deg);
+  }
+  50% {
+    background-size: 45px 45px;
+    opacity: 0.25;
+    transform: perspective(1000px) rotateX(2deg);
+  }
+}
